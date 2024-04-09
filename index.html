@@ -108,7 +108,11 @@
             // 정규식으로 검사
 
             let docs =await getDocs(collection(db, "User"));
-            
+            console.log(typeof(docs));
+
+            let userid = $('#userID').val();
+
+            let q = query(collection(db,"User"),where("ID","==",${userID}))
             // 1.docs 검사 
             // 2.docs의 길이 
 
@@ -125,7 +129,7 @@
     <div class="login-wrapper">
         <h2>Login</h2>
         <form method="post" id="login-form">
-            <input type="text" id="userName" placeholder="ID">
+            <input type="text" id="userID" placeholder="ID">
             <input type="password" id="userPassword" placeholder="Password">
             <input type="button" id="tryLogin" value="Login">
         </form>

@@ -100,7 +100,7 @@
 
         $('#seokjoon').click(async function() {
             alert("페이지 이동");
-            window.location.href = "./homepage.html";
+            window.location.href = "./pages/homepage.html";
 
         })
         $('#tryLogin').click(async function(){
@@ -112,7 +112,7 @@
 
             let userid = $('#userID').val();
 
-            let q = query(collection(db,"User"),where("ID","==",${userID}))
+     
             // 1.docs 검사 
             // 2.docs의 길이 
 

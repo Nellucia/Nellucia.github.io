@@ -4,287 +4,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flix</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>homepage</title>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
-
-        * {
-            font-family: "Gowun Dodum", sans-serif;
-            font-weight: 400;
-            font-style: normal;
+        body,
+        ul,
+        ol {
+            margin: 0px;
+            padding: 0px;
         }
 
-        .login-wrapper {
-            width: 400px;
-            height: 350px;
-            padding: 40px auto 5px auto;
-            box-sizing: border-box;
-            margin: 5px auto 5px auto;
+        div {
+            display: block;
         }
 
-        .login-wrapper>h2 {
-            font-size: 24px;
-            color: #6A24FE;
-            margin-bottom: 20px;
+        ul {
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding: 0px 90px;
+            unicode-bidi: isolate;
         }
 
-        #login-form>input {
-            width: 100%;
-            height: 48px;
-            padding: 0 10px;
-            box-sizing: border-box;
-            margin-bottom: 16px;
-            border-radius: 6px;
-            background-color: #F8F8F8;
+        li {
+            text-align: -webkit-match-parent;
+            unicode-bidi: isolate;
+
+            margin-left: 30px;
         }
 
-        #login-form>input::placeholder {
-            color: #D2D2D2;
+        a {
+            text-decoration-line: none;
+            color: black;
         }
 
-        #login-form>input[type="submit"] {
-            color: #fff;
-            font-size: 16px;
-            background-color: #6A24FE;
-            margin-top: 20px;
+        .shortcut_list {
+            display: flex;
         }
 
-        .main {
-
-            color: white;
-
-            background-image: url('https://occ-0-1123-1217.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABeIfo7VL_VDyKnljV66IkR-4XLb6xpZqhpLSo3JUtbivnEW4s60PD27muH1mdaANM_8rGpgbm6L2oDgA_iELHZLZ2IQjG5lvp5d2.jpg?r=e6e.jpg');
-            background-position: center;
-            background-size: cover;
+        ul,
+        .shortcut_item {
+            list-style: none;
+            color: black;
         }
 
-        .mycards {
-            width: 1200px;
-            margin: 5px auto 0px auto;
+        form {
+            display: block;
+            unicode-bidi: isolate;
+
+            margin: 0px;
+            padding: 0px;
         }
 
-        .mypostingbox {
+        .shortcut_item {
+            border: 1px solid black;
+            border-radius: 20px;
+
+            padding: 10px;
+        }
+
+        .search_group {
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .search_input_box {
             width: 500px;
-            margin: 5px auto 20px auto;
+            height: 70px;
 
-            border: 1px solid white;
-            padding: 20px;
-            border-radius: 5px;
+            border: 2px solid black;
         }
 
-        .form-floating>input {
-            background-color: transparent;
-            color: white;
+        .search_input {
+            width: 450px;
+            height: 58px;
+
+            position: relative;
+            padding: 17px 0px;
+            margin-top: 9px;
+
+            border: 0px;
+            outline: 0px;
         }
 
-        .form-floating>label {
-            color: white;
-        }
-
-        .input-group>label {
-            background-color: transparent;
-            color: white;
-        }
-
-        .mypostingbox>button {
+        #header {
+            background-color: rgb(255, 208, 0);
             width: 100%;
+            height: 170px;
+
+            margin-right: 30%;
+            margin: 0px auto 0px auto;
+            padding-top: 50px;
         }
 
-        body {
-            background-color: black;
+        #bannerWrap {
+            width: 93%;
+            height: 78%;
+
+            margin-left: 80px;
+        }
+
+        #left-top {
+            width: fit-content;
+            height: fit-content;
+
+            padding-top: 25px;
+        }
+
+        #logo_img {
+            text-align: center;
+        }
+
+        #container {
+            width: 100%;
+            height: 930px;
+        }
+
+        < !--가운데 정렬-->#shortcutArea {
+            background-color: orange;
+            margin: 0px;
+
+            text-align: center;
+        }
+
+        #search_group {
+            width: 100%;
+            height: 110px;
+
+            padding-top: 25px;
+        }
+
+        < !--가운데 정렬-->#search {
+            width: 500px;
+            height: 70px;
+
+            margin-right: 0px;
+        }
+
+        #footer {
+            background-color: rgb(255, 208, 0);
+            width: 100%;
+            height: 170px;
         }
     </style>
-    <script type="module">
-        // Firebase SDK 라이브러리 가져오기
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-
-
-        // Firebase 구성 정보 설정
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyBG8F45emOLHeo6tkshUuIS22ksUE1QybQ",
-            authDomain: "fir-prac-73220.firebaseapp.com",
-            projectId: "fir-prac-73220",
-            storageBucket: "fir-prac-73220.appspot.com",
-            messagingSenderId: "865311605933",
-            appId: "1:865311605933:web:13e603b3180a6353107224",
-            measurementId: "G-FZ6MCTVD12"
-        };
-
-        // Firebase 인스턴스 초기화
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        $('#postingbtn').click(async function () {
-            let image = $('#image').val();
-            let title = $('#title').val();
-            let star = $('#star').val();
-            let comment = $('#comment').val();
-            let doc = {
-                'image': image,
-                'title': title,
-                'star': star,
-                'comment': comment
-            };
-            await addDoc(collection(db, "movies"), doc);
-            alert('저장완료!');
-            window.location.reload();
-        })
-
-        $('#savebtn').click(async function () {
-            $('#postingbox').toggle();
-        })
-
-
-        let docs = await getDocs(collection(db, "movies"));
-        docs.forEach((doc) => {
-            let row = doc.data();
-
-            let image = row['image'];
-            let title = row['title'];
-            let comment = row['comment'];
-            let star = row['star'];
-            let temp_html = `
-            <div class="col">
-                <div class="card h-100">
-                    <img src="${image}"
-                        class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${title}</h5>
-                        <p class="card-text">${star}</p>
-                        <p class="card-text">${comment}</p>
-                    </div>
-                </div>
-            </div>`;
-            $('#card').append(temp_html);
-
-        });
-
-        function makecard() {
-            let image = $('#image').val();
-            let title = $('#title').val();
-            let comment = $('#comment').val();
-            let star = $('#star').val();
-            console.log(star);
-
-            let temp_html = `
-            <div class="col">
-                <div class="card h-100">
-                    <img src="${image}"
-                        class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${title}</h5>
-                        <p class="card-text">${star}</p>
-                        <p class="card-text">${comment}</p>
-                    </div>
-                </div>
-            </div>`;
-            $('#card').append(temp_html);
-        }
-
-        function LoginPopup() {
-            var url = "./loginpopup.html";
-            var popup = "LoginPopup";
-
-            window.open(url,popup,"width=400,height=300,left=100,top=50");
-        }
-
-        function Login() {
-            // 로그인 로직 
-
-
-            // 실패시 재시도
-
-            // 성공시 로그인
-        }
-
-        function SingUp() {
-            // 회원가입 
-
-
-            // 실패 시 경우
-
-            // 성공 
-        }
-    </script>
 </head>
 
-<body>  
-    <header class="p-3 text-bg-dark">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-                        <use xlink:href="#bootstrap"></use>
-                    </svg>
-                </a>
-
-                <ul id="upper_tag" class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="./review.html" class="nav-link px-2 text-danger">Spartaflix</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Series</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-                </ul>
-
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
-                        aria-label="Search">
-                </form>
-
-                <div class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
-                    <button type="button" class="btn btn-danger">Sign-up</button>
+<body>
+    <div id="wrap">
+        <div id="header" role="banner">
+            <div id="bannerWrap">
+                <div id="left-top">
+                    <ul id="left-top-element" style="display: flex; margin: auto; padding: 0px;">
+                        <li id="home" style="margin-right: 50px;">
+                            <h2><a href="#" class="link_service" style="color: green;">Home</a></h2>
+                        </li>
+                        <li id="map">
+                            <h2><a href="#" class="link_service" style="color: green;">Map</a></h2>
+                        </li>
+                    </ul>
+                </div>
+                <div id="logo_img">
+                    <picture class="logo" style="position: absolute; top: 50px;">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QBrRXhpZgAASUkqAAgAAAADAA4BAgAeAAAAMgAAAJiCAgATAAAAUAAAABIBAwABAAAAAQAAAAAAAABjYXQgbWVvd3MgZ3JheSB0YWJieSBTaG9ydGhhaXJEbXl0cm9fU2tvcm9ib2dhdG92/+0AjFBob3Rvc2hvcCAzLjAAOEJJTQQEAAAAAABwHAJQABNEbXl0cm9fU2tvcm9ib2dhdG92HAJ4AB5jYXQgbWVvd3MgZ3JheSB0YWJieSBTaG9ydGhhaXIcAnQAE0RteXRyb19Ta29yb2JvZ2F0b3YcAm4AGEdldHR5IEltYWdlcy9pU3RvY2twaG90b//hBUpodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iPgoJPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KCQk8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOklwdGM0eG1wQ29yZT0iaHR0cDovL2lwdGMub3JnL3N0ZC9JcHRjNHhtcENvcmUvMS4wL3htbG5zLyIgICB4bWxuczpHZXR0eUltYWdlc0dJRlQ9Imh0dHA6Ly94bXAuZ2V0dHlpbWFnZXMuY29tL2dpZnQvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpwbHVzPSJodHRwOi8vbnMudXNlcGx1cy5vcmcvbGRmL3htcC8xLjAvIiAgeG1sbnM6aXB0Y0V4dD0iaHR0cDovL2lwdGMub3JnL3N0ZC9JcHRjNHhtcEV4dC8yMDA4LTAyLTI5LyIgeG1sbnM6eG1wUmlnaHRzPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvcmlnaHRzLyIgZGM6UmlnaHRzPSJEbXl0cm9fU2tvcm9ib2dhdG92IiBwaG90b3Nob3A6Q3JlZGl0PSJHZXR0eSBJbWFnZXMvaVN0b2NrcGhvdG8iIEdldHR5SW1hZ2VzR0lGVDpBc3NldElEPSI1MDM2ODUzMTIiIHhtcFJpZ2h0czpXZWJTdGF0ZW1lbnQ9Imh0dHBzOi8vd3d3LmdldHR5aW1hZ2VzLmNvbS9ldWxhP3V0bV9tZWRpdW09b3JnYW5pYyZhbXA7dXRtX3NvdXJjZT1nb29nbGUmYW1wO3V0bV9jYW1wYWlnbj1pcHRjdXJsIiA+CjxkYzpjcmVhdG9yPjxyZGY6U2VxPjxyZGY6bGk+RG15dHJvX1Nrb3JvYm9nYXRvdjwvcmRmOmxpPjwvcmRmOlNlcT48L2RjOmNyZWF0b3I+PGRjOmRlc2NyaXB0aW9uPjxyZGY6QWx0PjxyZGY6bGkgeG1sOmxhbmc9IngtZGVmYXVsdCI+Y2F0IG1lb3dzIGdyYXkgdGFiYnkgU2hvcnRoYWlyPC9yZGY6bGk+PC9yZGY6QWx0PjwvZGM6ZGVzY3JpcHRpb24+CjxwbHVzOkxpY2Vuc29yPjxyZGY6U2VxPjxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPjxwbHVzOkxpY2Vuc29yVVJMPmh0dHBzOi8vd3d3LmdldHR5aW1hZ2VzLmNvbS9kZXRhaWwvNTAzNjg1MzEyP3V0bV9tZWRpdW09b3JnYW5pYyZhbXA7dXRtX3NvdXJjZT1nb29nbGUmYW1wO3V0bV9jYW1wYWlnbj1pcHRjdXJsPC9wbHVzOkxpY2Vuc29yVVJMPjwvcmRmOmxpPjwvcmRmOlNlcT48L3BsdXM6TGljZW5zb3I+CgkJPC9yZGY6RGVzY3JpcHRpb24+Cgk8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJ3Ij8+Cv/bAIQACQYHCAcGCQgHCAoKCQsNFg8NDAwNGxQVEBYgHSIiIB0fHyQoNCwkJjEnHx8tPS0xNTc6OjojKz9EPzhDNDk6NwEKCgoNDA0aDw8aNyUfJTc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3/8AAEQgAhQDIAwEiAAIRAQMRAf/EABsAAAEFAQEAAAAAAAAAAAAA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"
+                            alt="로고 이미지">
+                    </picture>
+                </div>
+                <div id="right-top-element" style="">
+                    <h2 style=""><a href="#" style="background-color:blue; color: green;">로그인</a></h2>
                 </div>
             </div>
         </div>
-    </header>
-    <div class="main">
-        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-            <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">킹덤2</h1>
-                <p class="col-md-8 fs-4">병든 왕을 둘러싸고 흉흉한 소문이 떠돈다. 어둠에 뒤덮인 조선, 기이한 역병에 신음하는 산하. 정체 모를 악에 맞서 백성을 구원할 희망은 오직
-                    세자뿐이다.</p>
-                <button id="savebtn" type="button" class="btn btn-outline-light">영화 기록하기</button>
-                <button type="button" class="btn btn-outline-light">상세 정보</button>
+        <div id="container">
+            <div id="containerArea">
+                <div id="search_area">
+                    <div id="search_group">
+                        <div id="search">
+                            <form id="sform" name="search" role="search" action="https://www.search.naver.com"
+                                method="get">
+                                <div class="search_input_box">
+                                    <input name="query" type="search" placeholder="지역을 검색해주세요." maxlength="255"
+                                        aria-label="지역을 검색해주세요." class="search_input">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                    </svg>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="shortcutArea" role="navigation" aria-label="주요 서비스"
+                    style="width: 100%; float:left; margin:0; text-align:center;">
+                    <ul class="shortcut_list" style="display: flex; margin: auto; padding: 0px;">
+                        <li class="shortcut_item">
+                            <a href="#" class="link_service">#인기있는</a>
+                        </li>
+                        <li class="shortcut_item">
+                            <a href="#" class="link_service">#떠오르는</a>
+                        </li>
+                        <li class="shortcut_item">
+                            <a href="#" class="link_service">#머지</a>
+                        </li>
+                        <li class="shortcut_item">
+                            <a href="#" class="link_service">#추천해요</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="mypostingbox" id="postingbox">
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="image" placeholder="영화 이미지 주소">
-            <label for="floatingInput">영화 이미지 주소</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="title" placeholder="영화 제작">
-            <label for="floatingInput">영화 제목</label>
-        </div>
-        <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">별점</label>
-            <select class="form-select" id="star">
-                <option selected>별점 선택</option>
-                <option value="⭐">⭐</option>
-                <option value="⭐⭐">⭐⭐</option>
-                <option value="⭐⭐⭐">⭐⭐⭐</option>
-                <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
-                <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
-            </select>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="comment" placeholder="추천 이유">
-            <label for="floatingInput">추천 이유</label>
-        </div>
-        <button id="postingbtn" type="button" class="btn btn-danger">기록하기</button>
-    </div>
-    </div>
-    <div class="mycards">
-        <div id="card" class="row row-cols-1 row-cols-md-4 g-4">
+        <div id="footer">
 
         </div>
     </div>

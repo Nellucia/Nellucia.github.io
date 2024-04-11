@@ -61,15 +61,18 @@
             border-radius: 5px;
 
         }
+
         .partition>h2 {
             text-align: center;
             color: green;
             padding-top: 10px;
             padding-bottom: 10px;
         }
-        .partition>h2>button{
+
+        .partition>h2>button {
             border-radius: 5px;
         }
+
         body {
             background-color: black;
         }
@@ -98,29 +101,54 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        $('#seokjoon').click(async function() {
+        let docs = await getDocs(collection(db, "User"));
+
+        // 유저 정보 딕셔너리
+        var userInfoDict = {};
+
+        docs.forEach(doc => {
+            let row = doc.data();
+
+            let id = row['ID'];
+            let pw = row['PW'];
+            console.log(id, pw);
+            if (id in userInfoDict) {
+                alert("중복된 아이디 존재!");
+            }
+            else {
+                userInfoDict[id] = pw;
+            }
+        });
+
+        $('#seokjoon').click(async function () {
             alert("페이지 이동");
-            window.location.href = "https://kopite97.github.io/";
+            window.location.href = "./_pages/homepage.html";
 
         })
-        $('#tryLogin').click(async function(){
-            alert("Try Login");
-            // 정규식으로 검사
-
-            let docs =await getDocs(collection(db, "User"));
-            console.log(typeof(docs));
-
+        $('#tryLogin').click(async function () {
+          
             let userid = $('#userID').val();
+            let userpw = $('#userPassword').val();
 
-     
-            // 1.docs 검사 
-            // 2.docs의 길이 
+             // 정규식으로 검사
+            if (userid.search(/\W|\s/g) > -1) {
+                alert('ID에 특수문자나 공백은 넣을 수 없다구요~');
+                return;
+            }
 
-            docs.forEach(doc =>{
-                let id = doc['ID'];
-                let pw = doc['PW'];
-            });
+           // 미리 만들어둔 유지 Dictionary에 유저 정보가 있는지 확인
+           if(userid in userInfoDict)
+           {
+                console.log('아이디 일치');
+                // 패스워드 확인
+                userpw == userInfoDict[userid] ? console.log("로그인 성공") : console.log("로그인 실패");
+           }
+           else
+           {
+                console.log('로그인 실패');
+           }
         })
+
 
     </script>
 </head>
@@ -129,7 +157,7 @@
     <div class="login-wrapper">
         <h2>Login</h2>
         <form method="post" id="login-form">
-            <input type="text" id="userID" placeholder="ID">
+            <input type="email" id="userID" placeholder="ID">
             <input type="password" id="userPassword" placeholder="Password">
             <input type="button" id="tryLogin" value="Login">
         </form>
@@ -157,4 +185,5 @@
         </h2>
     </div>
 </body>
+
 </html>

@@ -16,16 +16,6 @@
             width: 100%;
         }
 
-        .cardPartition {
-            width: 90%;
-            height: 100%;
-            margin: 5px auto 5px auto;
-        }
-
-        .cardPartition>card {
-            background-color: black;
-        }
-
         .announce {
             font-size: 15px;
             width: 400px;
@@ -84,16 +74,16 @@
             let link = rows['link'];
 
             let temp = `
-            <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">${name}</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">${store}</h6>
-                <p class="card-text">${comment}</p>
-                <a href="${link}" class="card-link">링크</a>
-            </div>
+            <div class="card" id="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${name}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">${store}</h6>
+                    <p class="card-text">${comment}</p>
+                    <a href="${link}" class="card-link">링크</a>
+                </div>
             </div>
             `
-            $('#cardparent').append(temp);
+            $('#card-group').append(temp);
             valid = true;
         });
 
@@ -171,10 +161,8 @@
         </div>
 
     </header>
-    <div class="cardPartition">
-        <div id="cardparent">
+    <div class="card-group" id="card-group">
 
-        </div>
     </div>
 
 
